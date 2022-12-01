@@ -19,7 +19,7 @@
     </logging>
     <testsuites>
         <testsuite name="Test">
-            <directory suffix=".php">./test/src</directory>
+            <directory suffix=".php">./admin/</directory>
         </testsuite>
     </testsuites>
     <filter>
