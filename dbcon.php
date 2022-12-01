@@ -1,6 +1,6 @@
 <?php
 
-$con=mysqli_connect('127.0.0.1','root','root','lpg_gas');
+$con=mysqli_connect('127.0.0.1','root','','lpg_gas');
 if(!$con)
 {
     die("not connected").mysqli_connect_error();
