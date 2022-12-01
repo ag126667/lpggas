@@ -15,7 +15,7 @@
     },
     "autoload": {
         "psr-4": {
-            "ag126667\\lpgas\\": "admin\index.php"
+            "ag126667\\lpgas\\": "admin"
         }
     },
     
