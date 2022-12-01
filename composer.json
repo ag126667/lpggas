@@ -1,5 +1,5 @@
 {
-    "name": "lpggas",
+    "name": "ag126667/lpggas",
     "description": "Hello World PHP project. Only for demonstration purpose for articles, tutorial, etc.",
     "type": "project",
     "license": "MIT",
@@ -15,7 +15,7 @@
     },
     "autoload": {
         "psr-4": {
-            "ag126667\\lpgas\\": "admin"
+            "ag126667\\lpgas": "admin"
         }
     },
     
