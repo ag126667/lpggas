@@ -1,35 +1,49 @@
-name: PHP Composer
+# Name of the workflow
+name: Basic-CI
 
-on:
-  push:
-    branches: [ $default-branch ]
-  pull_request:
-    branches: [ $default-branch ]
-
-permissions:
-  contents: read
+# When someone will push or make PR to this repository, this workflow will start
+on: [push, pull_request]
 
 jobs:
-  build:
+  tests:
 
+    # This workflow task will run on Ubuntu machine
     runs-on: ubuntu-latest
 
+    # Steps that should be performed to check whether tests task was successful or not
     steps:
-    - uses: actions/checkout@v3
+      - name: "Checkout latest revision"
+        uses: actions/checkout@v2
 
-    - name: Validate composer.json and composer.lock
-      run: composer validate --strict
+        # We are using shivammathur/setup-php@v1 public GitHub actions for keeping things easier
+      - name: "Install PHP with extensions"
+        uses: shivammathur/setup-php@v1
+        with:
+          # This job will be running on php7.4 version
+          php-version: '7.4'
 
-    - name: Cache Composer packages
-      id: composer-cache
-      uses: actions/cache@v3
-      with:
-        path: vendor
-        key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-php-
-    - name: Install dependencies
-      run: composer install --prefer-dist --no-progress
+          # For PHPUnit code coverage, we need xdebug
+          coverage: xdebug
 
-    # Add a test script to composer.json, for instance: "test": "vendor/bin/phpunit"
-    # Docs: https://getcomposer.org/doc/articles/scripts.md
+          # If we want to enable any other PHP extension we can add here
+          extensions: xdebug, intl, pdo_mysql, pdo
+
+      # We need to install composer.phar first in the system
+      - name: Install composer
+        run: curl --show-error --silent https://getcomposer.org/installer | php
+
+      # Run composer to install all dependencies
+      - name: Install composer dependencies
+        run: php composer.phar install
+
+      # Now run the PHPUnit tests
+      - name: Run PHPUnit tests
+        run: ./vendor/bin/phpunit --configuration=phpunit.xml --coverage-clover ./build/coverage/log/coverage.xml
+
+      # For code coverage report we are uploading our code coverage report to scrutinizer
+      - name: Downloading scrutinizer ocular.phar
+        run: wget https://scrutinizer-ci.com/ocular.phar
+
+      # Uploading reports for analysis
+      - name: Uploading code coverage to scrutinize
+        run: php ocular.phar code-coverage:upload --format=php-clover ./build/coverage/log/coverage.xml
