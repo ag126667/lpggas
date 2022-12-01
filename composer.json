@@ -15,14 +15,10 @@
     },
     "autoload": {
         "psr-4": {
-            "ag126667\\lpgas\\": "index.php"
+            "ag126667\\lpgas\\": "admin"
         }
     },
-    "autoload-dev": {
-        "psr-4": {
-            "ShahariaAzam\\HelloWorld\\Test\\": "index.php"
-        }
-    },
+    
     "scripts": {
         "test": "./vendor/bin/phpunit --configuration=phpunit.xml --coverage-clover build/coverage/log/coverage.xml"
     }
