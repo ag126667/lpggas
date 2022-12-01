@@ -1,24 +1,29 @@
 {
-    "name": "osteel/php-compatibility-demo",
-    "type": "library",
+    "name": "ag126667/lpggas",
+    "description": "Hello World PHP project. Only for demonstration purpose for articles, tutorial, etc.",
+    "type": "project",
     "license": "MIT",
-    "autoload": {
-        "psr-4": {
-            "Osteel\\PhpCompatibilityDemo\\": "src/"
-        }
-    },
     "authors": [
         {
-            "name": "Yannick Chenot",
-            "email": "yannick@yellowraincoat.co.uk"
+            "name": "Arvind Gupta",
+            "email": "ag126667@gmail.com"
         }
     ],
-    "minimum-stability": "stable",
-    "require": {
-        "php": "^7.4|^8.0",
-        "moneyphp/money": "^3.0.5|^4.0"
-    },
+    "require": {},
     "require-dev": {
-        "phpunit/phpunit": "^9.5"
+        "phpunit/phpunit": "^8.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "ag126667\\lpgas\\": "index.php"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "ShahariaAzam\\HelloWorld\\Test\\": "index.php"
+        }
+    },
+    "scripts": {
+        "test": "./vendor/bin/phpunit --configuration=phpunit.xml --coverage-clover build/coverage/log/coverage.xml"
     }
 }
