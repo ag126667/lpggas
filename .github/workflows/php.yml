@@ -19,3 +19,5 @@ jobs:
 
     - name: Install composer
       run: composer update
+    - name: Run phpstan
+      run: ./vendor/bin/phpstan analyse src --level 5
